@@ -109,5 +109,9 @@ describe('Test upgrade', async function () {
         //4.读取合约的action[0]
         const auction2 = await nftAuction.auctions(0)
         console.log("auction2::", auction2)
+        const nftAuctionV2 = await ethers.getContractAt("NFTAuctionv2", nftAuctionProxy.address)
+        const hello = await nftAuctionV2.testHello()
+        console.log("hello::", hello)
+        
     })
 })

@@ -1,13 +1,10 @@
 # Sample Hardhat Project
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+功能说明：
+拍卖合约，用户可以创建拍卖，出价，竞拍结束，出价最高的用户获得NFT
 
-Try running some of the following tasks:
+合约拥有者：创建，结束拍卖
+拍者：提供USDC和ETH两种代币进行出价竞拍
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
-```
+
+

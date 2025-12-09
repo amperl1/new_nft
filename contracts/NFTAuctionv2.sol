@@ -5,8 +5,8 @@ import "./NftAuction.sol";
 
 contract NFTAuctionv2 is NftAuction {
     
-    function testHello() public pure returns (string memory) {
-        return "Hello, World!";
+    function testHello() public pure returns (uint) {
+        return 666;
  
     }
     
