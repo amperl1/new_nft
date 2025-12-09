@@ -13,8 +13,8 @@ module.exports = {
   // },
   networks: {
     sepolia: {
-      url:"https://sepolia.infura.io/v3/773ce546239143aeac7f6f41aae96d57",
-      accounts: ["a32d1ad9927d1dc5dd0f26af26a476d50bcb085eb0367b359332f7d9891ce626"],
+      url:"https://sepolia.infura.io/v3/",
+      accounts: [""],
       live: false,
       saveDeployments: true,
       tags: ["deployNFT"]

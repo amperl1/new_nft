@@ -6,5 +6,5 @@
 合约拥有者：创建，结束拍卖
 拍者：提供USDC和ETH两种代币进行出价竞拍
 
-
+部署过程：npx hardhat deploy --network sepolia
 
