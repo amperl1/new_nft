@@ -57,6 +57,8 @@ contract NftAuction is Initializable,OwnableUpgradeable, UUPSUpgradeable, IERC72
     function getAdmin() public view returns(address) {
         return admin;
     }
+
+    event startAuctionEvent(uint256 _auctionId, uint256 _tokenId, address _nftAddress, uint256 _startPrice);
     function startAuction(uint256 _tokenId, address _nftAddress, uint256 _startPrice) public {
         require(msg.sender == admin, "You are not the owner");
         
@@ -66,9 +68,9 @@ contract NftAuction is Initializable,OwnableUpgradeable, UUPSUpgradeable, IERC72
         // 设置NFT合约地址
         auctions[auctionId] = Auction(_tokenId, false, _startPrice, _nftAddress,0, address(0), address(0));
         auctionId++;
-
+        emit startAuctionEvent(auctionId, _tokenId, _nftAddress, _startPrice);
     }
-
+    event bidEvent(uint256 _auctionId, uint256 amount, address _tokenAddress);
     function bid(uint256 _auctionId, uint256 amount, address _tokenAddress) public payable {
         Auction storage auction = auctions[_auctionId];
         require(auction.ended == false, "The auction has ended");
@@ -114,8 +116,9 @@ contract NftAuction is Initializable,OwnableUpgradeable, UUPSUpgradeable, IERC72
         auction.highestBidder = msg.sender;
         auction.highestBid = amount;
         auction._tokenAddress = _tokenAddress;
+        emit bidEvent(_auctionId, amount, _tokenAddress);
     }
-
+    event endAuctionEvent(uint256 _auctionId);
     function endAuction(uint256 _auctionId) public {
         Auction storage auction = auctions[_auctionId];
         require(msg.sender == admin, "You are not the owner");
@@ -135,6 +138,7 @@ contract NftAuction is Initializable,OwnableUpgradeable, UUPSUpgradeable, IERC72
         } else {
             IERC20(auction._tokenAddress).transfer(admin, auction.highestBid);
         }
+        emit endAuctionEvent(_auctionId);
     }
 
      function _authorizeUpgrade(address newImplementation)
