@@ -26,7 +26,7 @@ contract NftAuction is Initializable,OwnableUpgradeable, UUPSUpgradeable, IERC72
         address highestBidder;
         address _tokenAddress;
     }
-
+    
     function initialize() initializer public {
         admin = msg.sender;
         __Ownable_init(msg.sender);
@@ -57,7 +57,6 @@ contract NftAuction is Initializable,OwnableUpgradeable, UUPSUpgradeable, IERC72
     function getAdmin() public view returns(address) {
         return admin;
     }
-
     event startAuctionEvent(uint256 _auctionId, uint256 _tokenId, address _nftAddress, uint256 _startPrice);
     function startAuction(uint256 _tokenId, address _nftAddress, uint256 _startPrice) public {
         require(msg.sender == admin, "You are not the owner");
