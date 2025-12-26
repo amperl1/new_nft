@@ -19,10 +19,11 @@ func main() {
 		fmt.Println("Failed to connect to Ethereum client")
 	}
 	fmt.Println("Connected to Ethereum client")
+	go database.InitDataBase()
 	r := server.StartServer()
 	err := r.Run(":8080")
 	if err != nil {
 		return
 	}
-	database.InitDataBase()
+
 }

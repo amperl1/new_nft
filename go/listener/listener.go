@@ -69,19 +69,31 @@ func StartListener(client *ethclient.Client, config config.Config) {
 		case ev := <-createdCh:
 			log.Printf("NftAuctionStartAuctionEvent: StartPrice=%v,AuctionId=%v,NftAddress=%v,TokenId=%v",
 				ev.StartPrice, ev.AuctionId, ev.NftAddress, ev.TokenId)
-			createAuction := model.CreateAuctionEvent{}
+			createAuction := model.CreateAuctionEvent{
+				StartPrice: ev.StartPrice.Int64(),
+				AuctionId:  ev.AuctionId.Int64(),
+				NftAddress: ev.NftAddress.Hex(),
+				TokenId:    ev.TokenId.Int64(),
+			}
 			if err := database.Db.Create(&createAuction).Error; err != nil {
 				log.Printf("Failed to create createAuction ,AuctionId=%v", ev.AuctionId)
 			}
 		case ev := <-endedCh:
 			log.Printf("NftAuctionEndAuctionEvent: AuctionId=%v", ev.AuctionId)
-			endAuction := model.EndAuctionEvent{}
+			endAuction := model.EndAuctionEvent{
+				AuctionId: ev.AuctionId.Int64(),
+			}
 			if err := database.Db.Create(&endAuction).Error; err != nil {
 				log.Printf("Failed to create endAuction ,AuctionId=%v", ev.AuctionId)
 			}
 		case ev := <-bidCh:
-			log.Printf("NftAuctionBidEvent: AuctionId=%v,Amount=%v,TokenAddress=%v", ev.AuctionId, ev.Amount, ev.TokenAddress)
-			bidAuction := model.BidAuctionEvent{}
+			log.Printf("NftAuctionBidEvent: AuctionId=%v,Amount=%v,TokenAddress=%v",
+				ev.AuctionId, ev.Amount, ev.TokenAddress)
+			bidAuction := model.BidAuctionEvent{
+				AuctionId:    ev.AuctionId.Int64(),
+				Amount:       ev.Amount.Int64(),
+				TokenAddress: ev.TokenAddress.Hex(),
+			}
 			if err := database.Db.Create(&bidAuction).Error; err != nil {
 				log.Printf("Failed to create BidAuctionEvent ,AuctionId=%v", ev.AuctionId)
 			}

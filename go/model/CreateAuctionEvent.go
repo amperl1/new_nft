@@ -6,8 +6,8 @@ import (
 
 type CreateAuctionEvent struct {
 	gorm.Model
-	StartPrice string
-	AuctionId  string
+	StartPrice int64
+	AuctionId  int64
 	NftAddress string
-	TokenId    string
+	TokenId    int64
 }

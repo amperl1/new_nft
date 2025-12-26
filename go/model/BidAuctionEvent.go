@@ -6,7 +6,7 @@ import (
 
 type BidAuctionEvent struct {
 	gorm.Model
-	AuctionId    string
-	Amount       string
+	AuctionId    int64
+	Amount       int64
 	TokenAddress string
 }

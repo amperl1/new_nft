@@ -17,7 +17,9 @@ func StartServer() *gin.Engine {
 	auctionController := &controller.AuctionController{}
 	v1 := r.Group("/api/v1")
 	{
-		v1.GET("/auctions", auctionController.GetAuctions)
+		v1.GET("/getCreateAuctions", auctionController.GetCreateAuctions)
+		v1.GET("/getEndAuctions", auctionController.GetEndAuctions)
+		v1.GET("/getBidAuctions", auctionController.GetBidAuctions)
 	}
 	fmt.Println("Starting server")
 	return r

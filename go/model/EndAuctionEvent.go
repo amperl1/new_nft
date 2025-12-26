@@ -6,5 +6,5 @@ import (
 
 type EndAuctionEvent struct {
 	gorm.Model
-	AuctionId string
+	AuctionId int64
 }

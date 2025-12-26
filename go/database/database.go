@@ -1,6 +1,7 @@
 package database
 
 import (
+	"log"
 	"new_nft_go/model"
 
 	"gorm.io/driver/mysql"
@@ -20,4 +21,5 @@ func InitDataBase() {
 	)
 	if err != nil {
 	}
+	log.Println("Connected to database")
 }
